@@ -17,6 +17,14 @@
 		41573EB920AE7485002B6A24 /* GesturePushAndPopUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 41573EB820AE7485002B6A24 /* GesturePushAndPopUITests.m */; };
 		41573EC820AE7FEB002B6A24 /* ViewController2.m in Sources */ = {isa = PBXBuildFile; fileRef = 41573EC720AE7FEB002B6A24 /* ViewController2.m */; };
 		41573ECB20AEBDA3002B6A24 /* UIViewController+WHAnimationTransitioningSnapshot.m in Sources */ = {isa = PBXBuildFile; fileRef = 41573ECA20AEBDA3002B6A24 /* UIViewController+WHAnimationTransitioningSnapshot.m */; };
+		416918A320B2A175004C2BBE /* UIView+ScreenCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = 416918A220B2A175004C2BBE /* UIView+ScreenCapture.m */; };
+		416918A720B2B026004C2BBE /* BaseAnimatedTransitioningViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 416918A620B2B026004C2BBE /* BaseAnimatedTransitioningViewController.m */; };
+		416918AA20B2B067004C2BBE /* BaseAnimatedTransitioningNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 416918A920B2B067004C2BBE /* BaseAnimatedTransitioningNavigationController.m */; };
+		416918AD20B2B07D004C2BBE /* BaseAnimatedTransitioning.m in Sources */ = {isa = PBXBuildFile; fileRef = 416918AC20B2B07D004C2BBE /* BaseAnimatedTransitioning.m */; };
+		416918B020B2B25C004C2BBE /* UIView+Snapshot.m in Sources */ = {isa = PBXBuildFile; fileRef = 416918AF20B2B25C004C2BBE /* UIView+Snapshot.m */; };
+		416918B420B2B803004C2BBE /* CommonPushPopAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 416918B320B2B803004C2BBE /* CommonPushPopAnimation.m */; };
+		416918BA20B2BCB2004C2BBE /* ViewController3.m in Sources */ = {isa = PBXBuildFile; fileRef = 416918B920B2BCB2004C2BBE /* ViewController3.m */; };
+		416918BD20B2BCBA004C2BBE /* ViewController4.m in Sources */ = {isa = PBXBuildFile; fileRef = 416918BC20B2BCBA004C2BBE /* ViewController4.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +65,22 @@
 		41573EC720AE7FEB002B6A24 /* ViewController2.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController2.m; sourceTree = "<group>"; };
 		41573EC920AEBDA2002B6A24 /* UIViewController+WHAnimationTransitioningSnapshot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+WHAnimationTransitioningSnapshot.h"; sourceTree = "<group>"; };
 		41573ECA20AEBDA3002B6A24 /* UIViewController+WHAnimationTransitioningSnapshot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+WHAnimationTransitioningSnapshot.m"; sourceTree = "<group>"; };
+		416918A120B2A175004C2BBE /* UIView+ScreenCapture.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+ScreenCapture.h"; sourceTree = "<group>"; };
+		416918A220B2A175004C2BBE /* UIView+ScreenCapture.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+ScreenCapture.m"; sourceTree = "<group>"; };
+		416918A520B2B026004C2BBE /* BaseAnimatedTransitioningViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseAnimatedTransitioningViewController.h; sourceTree = "<group>"; };
+		416918A620B2B026004C2BBE /* BaseAnimatedTransitioningViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseAnimatedTransitioningViewController.m; sourceTree = "<group>"; };
+		416918A820B2B067004C2BBE /* BaseAnimatedTransitioningNavigationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseAnimatedTransitioningNavigationController.h; sourceTree = "<group>"; };
+		416918A920B2B067004C2BBE /* BaseAnimatedTransitioningNavigationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseAnimatedTransitioningNavigationController.m; sourceTree = "<group>"; };
+		416918AB20B2B07D004C2BBE /* BaseAnimatedTransitioning.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseAnimatedTransitioning.h; sourceTree = "<group>"; };
+		416918AC20B2B07D004C2BBE /* BaseAnimatedTransitioning.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseAnimatedTransitioning.m; sourceTree = "<group>"; };
+		416918AE20B2B25C004C2BBE /* UIView+Snapshot.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+Snapshot.h"; sourceTree = "<group>"; };
+		416918AF20B2B25C004C2BBE /* UIView+Snapshot.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+Snapshot.m"; sourceTree = "<group>"; };
+		416918B220B2B803004C2BBE /* CommonPushPopAnimation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonPushPopAnimation.h; sourceTree = "<group>"; };
+		416918B320B2B803004C2BBE /* CommonPushPopAnimation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommonPushPopAnimation.m; sourceTree = "<group>"; };
+		416918B820B2BCB2004C2BBE /* ViewController3.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController3.h; sourceTree = "<group>"; };
+		416918B920B2BCB2004C2BBE /* ViewController3.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController3.m; sourceTree = "<group>"; };
+		416918BB20B2BCBA004C2BBE /* ViewController4.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController4.h; sourceTree = "<group>"; };
+		416918BC20B2BCBA004C2BBE /* ViewController4.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController4.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +131,7 @@
 		41573E9320AE7481002B6A24 /* GesturePushAndPop */ = {
 			isa = PBXGroup;
 			children = (
+				416918A420B2AFC4004C2BBE /* AnimatedTransitioning */,
 				41573EC920AEBDA2002B6A24 /* UIViewController+WHAnimationTransitioningSnapshot.h */,
 				41573ECA20AEBDA3002B6A24 /* UIViewController+WHAnimationTransitioningSnapshot.m */,
 				41573E9420AE7481002B6A24 /* AppDelegate.h */,
@@ -115,6 +140,12 @@
 				41573E9820AE7481002B6A24 /* ViewController.m */,
 				41573EC620AE7FEB002B6A24 /* ViewController2.h */,
 				41573EC720AE7FEB002B6A24 /* ViewController2.m */,
+				416918B820B2BCB2004C2BBE /* ViewController3.h */,
+				416918B920B2BCB2004C2BBE /* ViewController3.m */,
+				416918BB20B2BCBA004C2BBE /* ViewController4.h */,
+				416918BC20B2BCBA004C2BBE /* ViewController4.m */,
+				416918A120B2A175004C2BBE /* UIView+ScreenCapture.h */,
+				416918A220B2A175004C2BBE /* UIView+ScreenCapture.m */,
 				41573E9A20AE7481002B6A24 /* Main.storyboard */,
 				41573E9D20AE7485002B6A24 /* Assets.xcassets */,
 				41573E9F20AE7485002B6A24 /* LaunchScreen.storyboard */,
@@ -140,6 +171,31 @@
 				41573EBA20AE7485002B6A24 /* Info.plist */,
 			);
 			path = GesturePushAndPopUITests;
+			sourceTree = "<group>";
+		};
+		416918A420B2AFC4004C2BBE /* AnimatedTransitioning */ = {
+			isa = PBXGroup;
+			children = (
+				416918B120B2B753004C2BBE /* Animations */,
+				416918A520B2B026004C2BBE /* BaseAnimatedTransitioningViewController.h */,
+				416918A620B2B026004C2BBE /* BaseAnimatedTransitioningViewController.m */,
+				416918A820B2B067004C2BBE /* BaseAnimatedTransitioningNavigationController.h */,
+				416918A920B2B067004C2BBE /* BaseAnimatedTransitioningNavigationController.m */,
+				416918AB20B2B07D004C2BBE /* BaseAnimatedTransitioning.h */,
+				416918AC20B2B07D004C2BBE /* BaseAnimatedTransitioning.m */,
+				416918AE20B2B25C004C2BBE /* UIView+Snapshot.h */,
+				416918AF20B2B25C004C2BBE /* UIView+Snapshot.m */,
+			);
+			path = AnimatedTransitioning;
+			sourceTree = "<group>";
+		};
+		416918B120B2B753004C2BBE /* Animations */ = {
+			isa = PBXGroup;
+			children = (
+				416918B220B2B803004C2BBE /* CommonPushPopAnimation.h */,
+				416918B320B2B803004C2BBE /* CommonPushPopAnimation.m */,
+			);
+			path = Animations;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -272,11 +328,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				416918A720B2B026004C2BBE /* BaseAnimatedTransitioningViewController.m in Sources */,
 				41573E9920AE7481002B6A24 /* ViewController.m in Sources */,
+				416918BA20B2BCB2004C2BBE /* ViewController3.m in Sources */,
+				416918B020B2B25C004C2BBE /* UIView+Snapshot.m in Sources */,
+				416918B420B2B803004C2BBE /* CommonPushPopAnimation.m in Sources */,
 				41573EC820AE7FEB002B6A24 /* ViewController2.m in Sources */,
 				41573ECB20AEBDA3002B6A24 /* UIViewController+WHAnimationTransitioningSnapshot.m in Sources */,
 				41573EA420AE7485002B6A24 /* main.m in Sources */,
+				416918AA20B2B067004C2BBE /* BaseAnimatedTransitioningNavigationController.m in Sources */,
 				41573E9620AE7481002B6A24 /* AppDelegate.m in Sources */,
+				416918BD20B2BCBA004C2BBE /* ViewController4.m in Sources */,
+				416918A320B2A175004C2BBE /* UIView+ScreenCapture.m in Sources */,
+				416918AD20B2B07D004C2BBE /* BaseAnimatedTransitioning.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
