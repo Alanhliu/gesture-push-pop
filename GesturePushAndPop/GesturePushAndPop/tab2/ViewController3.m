@@ -8,7 +8,7 @@
 
 #import "ViewController3.h"
 #import "ViewController4.h"
-@interface ViewController3 ()<BaseAnimatedTransitioningViewControllerDelegate>
+@interface ViewController3 ()
 
 @end
 
@@ -16,12 +16,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.baseAnimatedTransitioningDelegate = self;
+    self.pushInteractiveEnabel = YES;
 }
 
-- (void)baseAnimatedTransitioningHandle
+- (void)baseAnimatedInteractiveTransitioningPushAction
 {
     [self push:nil];
+}
+
+- (void)baseAnimatedInteractiveTransitioningPopAction
+{
+
 }
 
 - (IBAction)push:(id)sender {

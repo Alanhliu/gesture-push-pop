@@ -1,30 +1,30 @@
 //
-//  ViewController4.m
+//  ViewController5.m
 //  GesturePushAndPop
 //
-//  Created by siasun on 2018/5/21.
+//  Created by siasun on 2018/5/22.
 //  Copyright © 2018年 personal. All rights reserved.
 //
 
-#import "ViewController4.h"
+#import "ViewController5.h"
 
-@interface ViewController4 ()<BaseAnimatedTransitioningViewControllerDelegate>
+@interface ViewController5 ()
 
 @end
 
-@implementation ViewController4
+@implementation ViewController5
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.baseAnimatedTransitioningDelegate = self;
 }
 
-- (void)baseAnimatedTransitioningHandle
+- (void)baseAnimatedInteractiveTransitioningPushAction
 {
-    [self back:nil];
+    
 }
 
-- (IBAction)back:(id)sender {
+- (void)baseAnimatedInteractiveTransitioningPopAction
+{
     [self.navigationController popViewControllerAnimated:YES];
 }
 

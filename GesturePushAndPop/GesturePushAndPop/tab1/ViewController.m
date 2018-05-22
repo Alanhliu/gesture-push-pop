@@ -8,8 +8,7 @@
 
 #import "ViewController.h"
 #import "ViewController2.h"
-#import "UIViewController+WHAnimationTransitioningSnapshot.h"
-#import "UIView+ScreenCapture.m"
+#import "UIView+Snapshot.h"
 @interface ViewController ()<UIGestureRecognizerDelegate,UINavigationControllerDelegate,UIViewControllerAnimatedTransitioning>
 @property (nonatomic, strong, readwrite) UIPercentDrivenInteractiveTransition *interactiveTransition;
 @property (nonatomic, assign) CGPoint p;
@@ -131,7 +130,7 @@
          *  转场动画是两个控制器视图时间的动画，需要一个containerView来作为一个“舞台”，让动画执行。
          */
         
-        UIImage *fromImg = [fromViewController.view.window captureCurrentView];
+        UIImage *fromImg = [fromViewController.view.window snapshotImage];
         self.screenShotView.image = fromImg;
         self.screenShotView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
         

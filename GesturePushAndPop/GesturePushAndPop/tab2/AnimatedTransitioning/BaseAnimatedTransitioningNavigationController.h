@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+static NSString *const DEFAULT_ANIMATED_TRANSITIONING = @"CommonPushPopAnimation";
 @interface BaseAnimatedTransitioningNavigationController : UINavigationController
+
+@property (nonatomic, copy) NSString *customAnimatedTransitioning;
 
 @end

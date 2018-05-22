@@ -19,18 +19,18 @@
     return image;
 }
 
-- (UIView *)snapshot {
+- (UIView *)snapshotView {
     
     UIView *view = objc_getAssociatedObject(self, @"AnimatedTransitioningSnapshot");
-    if (!self) {
+    if (!view) {
         view = [self snapshotViewAfterScreenUpdates:NO];
-        [self setSnapshot:view];
+        [self setSnapshotView:view];
     }
     
     return view;
 }
 
-- (void)setSnapshot:(UIView *)snapshot {
+- (void)setSnapshotView:(UIView *)snapshot {
     
     objc_setAssociatedObject(self, @"AnimatedTransitioningSnapshot", snapshot, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     

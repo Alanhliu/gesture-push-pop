@@ -7,8 +7,8 @@
 //
 
 #import "BaseAnimatedTransitioningNavigationController.h"
-#import "BaseAnimatedTransitioning.h"
 #import "BaseAnimatedTransitioningViewController.h"
+#import "BaseAnimatedTransitioning.h"
 @interface BaseAnimatedTransitioningNavigationController ()<UINavigationControllerDelegate>
 
 @end
@@ -19,7 +19,7 @@
     [super viewDidLoad];
     
     self.delegate = self;
-    
+    self.customAnimatedTransitioning = DEFAULT_ANIMATED_TRANSITIONING;
 }
 
 //为这个动画添加用户交互
@@ -35,16 +35,16 @@
                                                fromViewController:(BaseAnimatedTransitioningViewController *)fromVC
                                                  toViewController:(BaseAnimatedTransitioningViewController *)toVC {
     
-    Class class = NSClassFromString(@"CommonPushPopAnimation");
+    Class class = NSClassFromString(self.customAnimatedTransitioning);
     
     if (fromVC.interactiveTransition) {
         
-        Class classInteractive = NSClassFromString(@"CommonPushPopAnimation");
+        Class classInteractive = NSClassFromString(self.customAnimatedTransitioning);
         BaseAnimatedTransitioning *baseAnimation = [[classInteractive alloc] initWithType:operation duration:0.6];
         baseAnimation.interactiveTransition = fromVC.interactiveTransition;
         return baseAnimation;  // 手势
     } else{
-        return [[class alloc] initWithType:operation duration:0.6];  // 非手势
+        return [[class alloc] initWithType:operation duration:0.35];  // 非手势
     }
 }
 

@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "UIView+Snapshot.h"
+#import "UIViewController+Snapshot.h"
 @interface BaseAnimatedTransitioning : NSObject<UIViewControllerAnimatedTransitioning>
 @property (nonatomic, strong, readwrite) UIPercentDrivenInteractiveTransition *interactiveTransition;
 

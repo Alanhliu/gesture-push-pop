@@ -7,29 +7,64 @@
 //
 
 #import "BaseAnimatedTransitioningViewController.h"
-
+#import "BaseAnimatedTransitioningNavigationController.h"
 @interface BaseAnimatedTransitioningViewController ()<UIGestureRecognizerDelegate>
 @property (nonatomic, strong, readwrite) UIPercentDrivenInteractiveTransition *interactiveTransition;
+@property (nonatomic, assign) BOOL isGesturePush;
+
 @end
 
 @implementation BaseAnimatedTransitioningViewController
 
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        [self commonInit];
+    }
+    return self;
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        [self commonInit];
+    }
+    return self;
+}
+
+- (void)commonInit
+{
+    _pushInteractiveEnabel = NO;
+    _popInteractiveEnabel = YES;
+}
+
+- (void)baseAnimatedInteractiveTransitioningPushAction{}
+- (void)baseAnimatedInteractiveTransitioningPopAction{}
+
+- (void)useDefaultAnimatedTransitioning
+{
+    ((BaseAnimatedTransitioningNavigationController *)self.navigationController).customAnimatedTransitioning = DEFAULT_ANIMATED_TRANSITIONING;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    UIPanGestureRecognizer *gestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
-    [self.view addGestureRecognizer:gestureRecognizer];
     
+    UIPanGestureRecognizer *gestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
+    gestureRecognizer.delegate = self;
+    [self.view addGestureRecognizer:gestureRecognizer];
 }
 
 - (void)handlePan:(UIPanGestureRecognizer *)recognizer {
     
     CGFloat progress = [recognizer translationInView:recognizer.view].x / recognizer.view.bounds.size.width;
     CGPoint translation = [recognizer velocityInView:recognizer.view];
-    BOOL isGesturePush = NO;
     if (recognizer.state == UIGestureRecognizerStateBegan) {
-        isGesturePush = translation.x<0 ? YES : NO;
+        self.isGesturePush = translation.x<0 ? YES : NO;
     }
-    if (isGesturePush) {
+    
+    if (self.isGesturePush) {
         progress = -progress;
     }
     progress = MIN(1.0, MAX(0.0, progress));
@@ -39,15 +74,19 @@
         // Create a interactive transition and
         // push or pop the view controller
         self.interactiveTransition = [[UIPercentDrivenInteractiveTransition alloc] init];
-        if ([self.baseAnimatedTransitioningDelegate respondsToSelector:@selector(baseAnimatedTransitioningHandle)]) {
-            [self.baseAnimatedTransitioningDelegate baseAnimatedTransitioningHandle];
+        if (self.isGesturePush) {
+            [self baseAnimatedInteractiveTransitioningPushAction];
+        } else {
+            [self baseAnimatedInteractiveTransitioningPopAction];
         }
+        
         [self.interactiveTransition updateInteractiveTransition:0];
         
     } else if (recognizer.state == UIGestureRecognizerStateChanged) {
         
         // Update the interactive transition's progress
         [self.interactiveTransition updateInteractiveTransition:progress];
+        
     } else if (recognizer.state == UIGestureRecognizerStateEnded ||
                recognizer.state == UIGestureRecognizerStateCancelled) {
         
@@ -60,6 +99,19 @@
         
         self.interactiveTransition = nil;
     }
+}
+
+- (BOOL)gestureRecognizerShouldBegin:(UIPanGestureRecognizer *)recognizer {
+    CGPoint translation = [recognizer velocityInView:recognizer.view];
+    BOOL isGesturePush = translation.x<0 ? YES : NO;
+    if (isGesturePush) {
+        if (!self.pushInteractiveEnabel)
+            return NO;
+    } else {
+        if (!self.popInteractiveEnabel)
+            return NO;
+    }
+    return YES;
 }
 
 - (void)didReceiveMemoryWarning {
