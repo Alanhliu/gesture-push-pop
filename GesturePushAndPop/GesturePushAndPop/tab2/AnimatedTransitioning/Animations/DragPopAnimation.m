@@ -57,7 +57,6 @@
     
     UIView *containerView = [transitionContext containerView];
     
-    
     [containerView addSubview:toViewController.view];
     [containerView addSubview:snapshotView];
     [containerView addSubview:fromViewController.view];
@@ -68,7 +67,7 @@
     }
     
     NSTimeInterval duration = [self transitionDuration:transitionContext];
-    snapshotView.frame = CGRectMake(-[UIScreen mainScreen].bounds.size.width*0.5, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
+    snapshotView.frame = CGRectMake(0, [UIScreen mainScreen].bounds.size.height, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
     
     [UIView animateWithDuration:duration animations:^{
         

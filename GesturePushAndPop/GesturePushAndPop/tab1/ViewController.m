@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "ViewController2.h"
 #import "UIView+Snapshot.h"
+#import "UIViewController+Snapshot.h"
 @interface ViewController ()<UIGestureRecognizerDelegate,UINavigationControllerDelegate,UIViewControllerAnimatedTransitioning>
 @property (nonatomic, strong, readwrite) UIPercentDrivenInteractiveTransition *interactiveTransition;
 @property (nonatomic, assign) CGPoint p;
@@ -93,95 +94,71 @@
 }
 
 - (void)animateTransition:(id <UIViewControllerContextTransitioning>)transitionContext {
-    NSLog(@"animateTransition------");
-    
-//    UIViewController *toVC = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
-//    UIView *toView = [transitionContext viewForKey:UITransitionContextToViewKey];
-//    UIView *fromView = [transitionContext viewForKey:UITransitionContextFromViewKey];
-//
-//    CGRect thumbFrame = self.button.frame;
-//    [toView setFrame:thumbFrame];
-//
-//    [[transitionContext containerView] addSubview:toView];
-//
-//    CGRect toViewFinalFrame = [transitionContext finalFrameForViewController:toVC];
-//    [UIView animateWithDuration:[self transitionDuration:transitionContext]
-//                     animations:^{
-//                         [toView setFrame:toViewFinalFrame];
-//                     }
-//                     completion:^(BOOL finished) {
-//                         if (![transitionContext transitionWasCancelled]) {
-//                             [fromView removeFromSuperview];
-//                             [transitionContext completeTransition:YES];
-//                         }
-//                         else {
-//                             [toView removeFromSuperview];
-//                             [transitionContext completeTransition:NO];
-//                         }
-//                     }];
-    
-
     if (self.operation == UINavigationControllerOperationPush) {
         UIViewController *fromViewController = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
         
         UIViewController *toViewController = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
         
-        /**
-         *  转场动画是两个控制器视图时间的动画，需要一个containerView来作为一个“舞台”，让动画执行。
-         */
+        UIView *snapshotView = fromViewController.snapshotView;
         
-        UIImage *fromImg = [fromViewController.view.window snapshotImage];
-        self.screenShotView.image = fromImg;
-        self.screenShotView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
+        snapshotView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
         
         UIView *containerView = [transitionContext containerView];
-        [containerView addSubview:self.screenShotView];
-        
+        [containerView addSubview:snapshotView];
         [containerView addSubview:toViewController.view];
-//        [containerView insertSubview:self.screenShotView belowSubview:fromViewController.view];
         
-        UITabBar *tabbar = self.tabBarController.tabBar;
+        UITabBar *tabbar = fromViewController.tabBarController.tabBar;
         if (tabbar) {
             tabbar.hidden = YES;
         }
         
         NSTimeInterval duration = [self transitionDuration:transitionContext];
         toViewController.view.frame = CGRectMake([UIScreen mainScreen].bounds.size.width, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
-
+        
         [UIView animateWithDuration:duration animations:^{
-//            toViewController.view.transform = CGAffineTransformMakeTranslation(0, 0);
-            self.screenShotView.frame = CGRectMake(-[UIScreen mainScreen].bounds.size.width*0.5, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
+            
+            snapshotView.frame = CGRectMake(-[UIScreen mainScreen].bounds.size.width*0.5, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
             toViewController.view.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
             
         } completion:^(BOOL finished) {
             [transitionContext completeTransition:!transitionContext.transitionWasCancelled];
-            self.screenShotView.image = nil;
-            [self.screenShotView removeFromSuperview];
+            [snapshotView removeFromSuperview];
             tabbar.hidden = NO;
         }];
     } else {
         UIViewController *fromViewController = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
-
+        
         UIViewController *toViewController = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
         
-        /**
-         *  转场动画是两个控制器视图时间的动画，需要一个containerView来作为一个“舞台”，让动画执行。
-         */
+        
+        fromViewController.view.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
+        
+        UIView *snapshotView = toViewController.snapshotView;
+        
         UIView *containerView = [transitionContext containerView];
-        [containerView insertSubview:toViewController.view belowSubview:fromViewController.view];
+        
+        
+        [containerView addSubview:toViewController.view];
+        [containerView addSubview:snapshotView];
+        [containerView addSubview:fromViewController.view];
+        
+        UITabBar *tabbar = toViewController.tabBarController.tabBar;
+        if (tabbar) {
+            tabbar.hidden = YES;
+        }
         
         NSTimeInterval duration = [self transitionDuration:transitionContext];
+        snapshotView.frame = CGRectMake(-[UIScreen mainScreen].bounds.size.width*0.5, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
         
-        /**
-         *  执行动画，我们让fromVC的视图移动到屏幕最右侧
-         */
         [UIView animateWithDuration:duration animations:^{
-            fromViewController.view.transform = CGAffineTransformMakeTranslation([UIScreen mainScreen].bounds.size.width, 0);
-        }completion:^(BOOL finished) {
-            /**
-             *  当你的动画执行完成，这个方法必须要调用，否则系统会认为你的其余任何操作都在动画执行过程中。
-             */
+            
+            fromViewController.view.frame = CGRectMake([UIScreen mainScreen].bounds.size.width, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
+            snapshotView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
+            
+        } completion:^(BOOL finished) {
             [transitionContext completeTransition:!transitionContext.transitionWasCancelled];
+            [snapshotView removeFromSuperview];
+            tabbar.hidden = NO;
         }];
     }
 }
@@ -191,21 +168,9 @@
     NSLog(@"end");
 }
 
-//- (void)navigationController:(UINavigationController *)navigationController
-//      willShowViewController:(UIViewController *)viewController
-//                    animated:(BOOL)animated
-//{
-//    if (viewController.hidesBottomBarWhenPushed) {
-//        self.tabBarController.tabBar.hidden = YES;
-//    } else {
-//        self.tabBarController.tabBar.hidden = NO;
-//    }
-//}
-
 
 - (IBAction)push:(id)sender {
     ViewController2 *v2 = [self.storyboard instantiateViewControllerWithIdentifier:@"ViewController2"];
-    v2.hidesBottomBarWhenPushed;
     [self.navigationController pushViewController:v2 animated:YES];
 }
 

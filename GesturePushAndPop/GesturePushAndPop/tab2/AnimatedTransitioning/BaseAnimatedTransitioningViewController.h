@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+//
+static NSString *const AnimatedTransitioning_DragPop = @"DragPopAnimation";
+
 @interface BaseAnimatedTransitioningViewController : UIViewController
 @property (nonatomic, strong, readonly) UIPercentDrivenInteractiveTransition *interactiveTransition;
 
@@ -24,5 +27,8 @@
 - (void)baseAnimatedInteractiveTransitioningPushAction;
 - (void)baseAnimatedInteractiveTransitioningPopAction;
 
+- (void)baseAnimatedInteractiveTransitioningTouch;
+
 - (void)useDefaultAnimatedTransitioning;
+- (void)setCustomAnimatedTransitioning:(NSString *)customAT;
 @end

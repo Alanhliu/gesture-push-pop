@@ -48,12 +48,17 @@
     ((BaseAnimatedTransitioningNavigationController *)self.navigationController).customAnimatedTransitioning = DEFAULT_ANIMATED_TRANSITIONING;
 }
 
+- (void)setCustomAnimatedTransitioning:(NSString *)customAT
+{
+    ((BaseAnimatedTransitioningNavigationController *)self.navigationController).customAnimatedTransitioning = customAT;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    UIPanGestureRecognizer *gestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
-    gestureRecognizer.delegate = self;
-    [self.view addGestureRecognizer:gestureRecognizer];
+    UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
+    panGestureRecognizer.delegate = self;
+    [self.view addGestureRecognizer:panGestureRecognizer];
 }
 
 - (void)handlePan:(UIPanGestureRecognizer *)recognizer {

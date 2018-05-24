@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		414E544220B53F8600EB9E99 /* ViewController2Detail.m in Sources */ = {isa = PBXBuildFile; fileRef = 414E544120B53F8600EB9E99 /* ViewController2Detail.m */; };
 		41573E9620AE7481002B6A24 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 41573E9520AE7481002B6A24 /* AppDelegate.m */; };
 		41573E9920AE7481002B6A24 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41573E9820AE7481002B6A24 /* ViewController.m */; };
 		41573E9C20AE7481002B6A24 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41573E9A20AE7481002B6A24 /* Main.storyboard */; };
@@ -16,6 +17,9 @@
 		41573EAE20AE7485002B6A24 /* GesturePushAndPopTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 41573EAD20AE7485002B6A24 /* GesturePushAndPopTests.m */; };
 		41573EB920AE7485002B6A24 /* GesturePushAndPopUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 41573EB820AE7485002B6A24 /* GesturePushAndPopUITests.m */; };
 		41573EC820AE7FEB002B6A24 /* ViewController2.m in Sources */ = {isa = PBXBuildFile; fileRef = 41573EC720AE7FEB002B6A24 /* ViewController2.m */; };
+		415C957420B6538100811735 /* DetailTransitioning.m in Sources */ = {isa = PBXBuildFile; fileRef = 415C957320B6538100811735 /* DetailTransitioning.m */; };
+		415C957720B663E200811735 /* DetailCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 415C957620B663E200811735 /* DetailCollectionViewCell.m */; };
+		415C957A20B687F100811735 /* DetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 415C957920B687F100811735 /* DetailTableViewCell.m */; };
 		416918A720B2B026004C2BBE /* BaseAnimatedTransitioningViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 416918A620B2B026004C2BBE /* BaseAnimatedTransitioningViewController.m */; };
 		416918AA20B2B067004C2BBE /* BaseAnimatedTransitioningNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 416918A920B2B067004C2BBE /* BaseAnimatedTransitioningNavigationController.m */; };
 		416918AD20B2B07D004C2BBE /* BaseAnimatedTransitioning.m in Sources */ = {isa = PBXBuildFile; fileRef = 416918AC20B2B07D004C2BBE /* BaseAnimatedTransitioning.m */; };
@@ -46,6 +50,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		414E544020B53F8600EB9E99 /* ViewController2Detail.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController2Detail.h; sourceTree = "<group>"; };
+		414E544120B53F8600EB9E99 /* ViewController2Detail.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController2Detail.m; sourceTree = "<group>"; };
 		41573E9120AE7481002B6A24 /* GesturePushAndPop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GesturePushAndPop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		41573E9420AE7481002B6A24 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		41573E9520AE7481002B6A24 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -64,6 +70,12 @@
 		41573EBA20AE7485002B6A24 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		41573EC620AE7FEB002B6A24 /* ViewController2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController2.h; sourceTree = "<group>"; };
 		41573EC720AE7FEB002B6A24 /* ViewController2.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController2.m; sourceTree = "<group>"; };
+		415C957220B6538100811735 /* DetailTransitioning.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailTransitioning.h; sourceTree = "<group>"; };
+		415C957320B6538100811735 /* DetailTransitioning.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailTransitioning.m; sourceTree = "<group>"; };
+		415C957520B663E200811735 /* DetailCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailCollectionViewCell.h; sourceTree = "<group>"; };
+		415C957620B663E200811735 /* DetailCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailCollectionViewCell.m; sourceTree = "<group>"; };
+		415C957820B687F100811735 /* DetailTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailTableViewCell.h; sourceTree = "<group>"; };
+		415C957920B687F100811735 /* DetailTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailTableViewCell.m; sourceTree = "<group>"; };
 		416918A520B2B026004C2BBE /* BaseAnimatedTransitioningViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseAnimatedTransitioningViewController.h; sourceTree = "<group>"; };
 		416918A620B2B026004C2BBE /* BaseAnimatedTransitioningViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseAnimatedTransitioningViewController.m; sourceTree = "<group>"; };
 		416918A820B2B067004C2BBE /* BaseAnimatedTransitioningNavigationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseAnimatedTransitioningNavigationController.h; sourceTree = "<group>"; };
@@ -202,6 +214,14 @@
 				41573E9820AE7481002B6A24 /* ViewController.m */,
 				41573EC620AE7FEB002B6A24 /* ViewController2.h */,
 				41573EC720AE7FEB002B6A24 /* ViewController2.m */,
+				414E544020B53F8600EB9E99 /* ViewController2Detail.h */,
+				414E544120B53F8600EB9E99 /* ViewController2Detail.m */,
+				415C957520B663E200811735 /* DetailCollectionViewCell.h */,
+				415C957620B663E200811735 /* DetailCollectionViewCell.m */,
+				415C957820B687F100811735 /* DetailTableViewCell.h */,
+				415C957920B687F100811735 /* DetailTableViewCell.m */,
+				415C957220B6538100811735 /* DetailTransitioning.h */,
+				415C957320B6538100811735 /* DetailTransitioning.m */,
 			);
 			path = tab1;
 			sourceTree = "<group>";
@@ -364,11 +384,15 @@
 				416918B020B2B25C004C2BBE /* UIView+Snapshot.m in Sources */,
 				416918B420B2B803004C2BBE /* CommonPushPopAnimation.m in Sources */,
 				41573EC820AE7FEB002B6A24 /* ViewController2.m in Sources */,
+				414E544220B53F8600EB9E99 /* ViewController2Detail.m in Sources */,
 				417C212820B3C1A000E11B48 /* ViewController5.m in Sources */,
 				417C213520B404FB00E11B48 /* DragPopAnimation.m in Sources */,
 				41573EA420AE7485002B6A24 /* main.m in Sources */,
 				416918AA20B2B067004C2BBE /* BaseAnimatedTransitioningNavigationController.m in Sources */,
+				415C957A20B687F100811735 /* DetailTableViewCell.m in Sources */,
+				415C957420B6538100811735 /* DetailTransitioning.m in Sources */,
 				41573E9620AE7481002B6A24 /* AppDelegate.m in Sources */,
+				415C957720B663E200811735 /* DetailCollectionViewCell.m in Sources */,
 				416918BD20B2BCBA004C2BBE /* ViewController4.m in Sources */,
 				416918AD20B2B07D004C2BBE /* BaseAnimatedTransitioning.m in Sources */,
 			);

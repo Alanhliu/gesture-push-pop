@@ -14,6 +14,18 @@
 
 @implementation ViewController5
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [self useDefaultAnimatedTransitioning];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self setCustomAnimatedTransitioning:AnimatedTransitioning_DragPop];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 }

@@ -7,8 +7,8 @@
 //
 
 #import "ViewController2.h"
-
-@interface ViewController2 ()<UIGestureRecognizerDelegate,UINavigationControllerDelegate,UIViewControllerAnimatedTransitioning>
+#import "ViewController2Detail.h"
+@interface ViewController2 ()<UIGestureRecognizerDelegate,UINavigationControllerDelegate,UIViewControllerAnimatedTransitioning,UICollectionViewDelegate,UICollectionViewDataSource>
 @property (nonatomic, strong, readwrite) UIPercentDrivenInteractiveTransition *interactiveTransition;
 @property (nonatomic, assign) CGPoint p;
 @property (nonatomic, assign) double progress;
@@ -18,7 +18,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    self.navigationController.delegate = self;
+    self.navigationController.delegate = self;
     
     UIPanGestureRecognizer *gestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
     [self.view addGestureRecognizer:gestureRecognizer];
@@ -49,6 +49,9 @@
     } else if (recognizer.state == UIGestureRecognizerStateChanged) {
         
         // Update the interactive transition's progress
+        self.p = [recognizer locationInView:self.view];
+        NSLog(@"%@",NSStringFromCGPoint(self.p));
+        
         [self.interactiveTransition updateInteractiveTransition:progress];
     } else if (recognizer.state == UIGestureRecognizerStateEnded || recognizer.state == UIGestureRecognizerStateCancelled) {
         
@@ -102,38 +105,60 @@
     
     UIViewController *toViewController = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
     
-    /**
-     *  转场动画是两个控制器视图时间的动画，需要一个containerView来作为一个“舞台”，让动画执行。
-     */
     UIView *containerView = [transitionContext containerView];
-    [containerView insertSubview:toViewController.view belowSubview:fromViewController.view];
+
+    [containerView addSubview:toViewController.view];
+    [containerView addSubview:fromViewController.view];
+    
+    
+    fromViewController.view.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
     
     NSTimeInterval duration = [self transitionDuration:transitionContext];
-    toViewController.view.transform = CGAffineTransformMakeTranslation(-[UIScreen mainScreen].bounds.size.width/2, 0);
-    /**
-     *  执行动画，我们让fromVC的视图移动到屏幕最右侧
-     */
+
     [UIView animateWithDuration:duration animations:^{
-        fromViewController.view.transform = CGAffineTransformMakeTranslation([UIScreen mainScreen].bounds.size.width, 0);
-        toViewController.view.transform = CGAffineTransformMakeTranslation(0, 0);
-//        NSLog(@"%@",NSStringFromCGPoint(self.p));
-//        fromViewController.view.center = self.p;
-//        fromViewController.view.bounds = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width*self.progress, [UIScreen mainScreen].bounds.size.height*self.progress);
+       
+        fromViewController.view.frame = CGRectMake(100, 100, 100, 100);
         
     } completion:^(BOOL finished) {
-        /**
-         *  当你的动画执行完成，这个方法必须要调用，否则系统会认为你的其余任何操作都在动画执行过程中。
-         */
         [transitionContext completeTransition:!transitionContext.transitionWasCancelled];
+        [fromViewController.view removeFromSuperview];
     }];
+}
+
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
+    
+    UITouch *touch = [touches anyObject];
+    
+    CGPoint currentPoint = [touch locationInView:self.view.superview];
+    CGPoint previousPoint = [touch previousLocationInView:self.view.superview];
+    
+    CGPoint center = self.view.center;
+    
+    center.x += (currentPoint.x - previousPoint.x);
+    center.y += (currentPoint.y - previousPoint.y);
+    self.view.center = center;
 }
 
 - (void)animationEnded:(BOOL) transitionCompleted {
     NSLog(@"end");
 }
 
-- (IBAction)back:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return 20;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
+    
+    return cell;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    ViewController2Detail *vc2d = [self.storyboard instantiateViewControllerWithIdentifier:@"ViewController2Detail"];
+    [self presentViewController:vc2d animated:YES completion:nil];
 }
 
 - (void)didReceiveMemoryWarning {
