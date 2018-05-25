@@ -57,9 +57,15 @@ static CGRect startRect;
 {
     if ([recognizer isKindOfClass:UIPanGestureRecognizer.class]) {
         UIPanGestureRecognizer *panRecognizer = (UIPanGestureRecognizer *)recognizer;
-        CGFloat f = [panRecognizer translationInView:recognizer.view].x;
-        CGPoint translation = [panRecognizer velocityInView:recognizer.view];
-        return translation.x<0 ? NO : YES;
+        
+        CGFloat translation = [panRecognizer translationInView:recognizer.view].x;
+        CGPoint velocity = [panRecognizer velocityInView:recognizer.view];
+        if (velocity.x > 0 &&
+            fabs(velocity.x) > fabs(velocity.y)) {
+            return YES;
+        } else {
+            return NO;
+        }
     } else {
         return YES;
     }
