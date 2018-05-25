@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4141E0EF20B7DE7500180C51 /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 4141E0EE20B7DE7500180C51 /* Message.m */; };
+		4141E0F220B7E01F00180C51 /* VC2CollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4141E0F120B7E01F00180C51 /* VC2CollectionViewCell.m */; };
 		414E544220B53F8600EB9E99 /* ViewController2Detail.m in Sources */ = {isa = PBXBuildFile; fileRef = 414E544120B53F8600EB9E99 /* ViewController2Detail.m */; };
 		41573E9620AE7481002B6A24 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 41573E9520AE7481002B6A24 /* AppDelegate.m */; };
 		41573E9920AE7481002B6A24 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41573E9820AE7481002B6A24 /* ViewController.m */; };
@@ -50,6 +52,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4141E0ED20B7DE7500180C51 /* Message.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
+		4141E0EE20B7DE7500180C51 /* Message.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
+		4141E0F020B7E01F00180C51 /* VC2CollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VC2CollectionViewCell.h; sourceTree = "<group>"; };
+		4141E0F120B7E01F00180C51 /* VC2CollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VC2CollectionViewCell.m; sourceTree = "<group>"; };
 		414E544020B53F8600EB9E99 /* ViewController2Detail.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController2Detail.h; sourceTree = "<group>"; };
 		414E544120B53F8600EB9E99 /* ViewController2Detail.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController2Detail.m; sourceTree = "<group>"; };
 		41573E9120AE7481002B6A24 /* GesturePushAndPop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GesturePushAndPop.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -214,8 +220,12 @@
 				41573E9820AE7481002B6A24 /* ViewController.m */,
 				41573EC620AE7FEB002B6A24 /* ViewController2.h */,
 				41573EC720AE7FEB002B6A24 /* ViewController2.m */,
+				4141E0F020B7E01F00180C51 /* VC2CollectionViewCell.h */,
+				4141E0F120B7E01F00180C51 /* VC2CollectionViewCell.m */,
 				414E544020B53F8600EB9E99 /* ViewController2Detail.h */,
 				414E544120B53F8600EB9E99 /* ViewController2Detail.m */,
+				4141E0ED20B7DE7500180C51 /* Message.h */,
+				4141E0EE20B7DE7500180C51 /* Message.m */,
 				415C957520B663E200811735 /* DetailCollectionViewCell.h */,
 				415C957620B663E200811735 /* DetailCollectionViewCell.m */,
 				415C957820B687F100811735 /* DetailTableViewCell.h */,
@@ -381,6 +391,7 @@
 				41573E9920AE7481002B6A24 /* ViewController.m in Sources */,
 				417C212520B3A51000E11B48 /* UIViewController+Snapshot.m in Sources */,
 				416918BA20B2BCB2004C2BBE /* ViewController3.m in Sources */,
+				4141E0F220B7E01F00180C51 /* VC2CollectionViewCell.m in Sources */,
 				416918B020B2B25C004C2BBE /* UIView+Snapshot.m in Sources */,
 				416918B420B2B803004C2BBE /* CommonPushPopAnimation.m in Sources */,
 				41573EC820AE7FEB002B6A24 /* ViewController2.m in Sources */,
@@ -394,6 +405,7 @@
 				41573E9620AE7481002B6A24 /* AppDelegate.m in Sources */,
 				415C957720B663E200811735 /* DetailCollectionViewCell.m in Sources */,
 				416918BD20B2BCBA004C2BBE /* ViewController4.m in Sources */,
+				4141E0EF20B7DE7500180C51 /* Message.m in Sources */,
 				416918AD20B2B07D004C2BBE /* BaseAnimatedTransitioning.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

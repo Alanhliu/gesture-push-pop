@@ -9,5 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface ViewController2Detail : UIViewController
+@property (nonatomic, strong) NSMutableArray *messageArray;
 
+@property (nonatomic, assign) NSUInteger currentIndex;
+@property (nonatomic, assign) CGRect currentRect;
+@property (nonatomic, strong) UIView *moveShapShotView;
 @end

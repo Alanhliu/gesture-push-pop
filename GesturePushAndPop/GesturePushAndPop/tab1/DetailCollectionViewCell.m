@@ -7,8 +7,10 @@
 //
 
 #import "DetailCollectionViewCell.h"
-
+#import "UIView+Snapshot.h"
 @interface DetailCollectionViewCell ()<UIGestureRecognizerDelegate>
+
+//@property (nonatomic, strong) UIView *moveSnapshotView;
 
 @end
 
@@ -40,16 +42,31 @@ static CGRect startRect;
         originCenter = self.moveContentView.center;
         startRect = self.moveContentView.frame;
         
+//        self.moveSnapshotView = [self.moveContentView snapshotView];
+//        self.moveSnapshotView.frame = startRect;
+//        [self addSubview:self.moveSnapshotView];
+        
     } else if (recognizer.state == UIGestureRecognizerStateChanged) {
         CGPoint movePoint = [recognizer locationInView:self];
         
-        NSLog(@"%@",NSStringFromCGPoint(movePoint));
+//        NSLog(@"%@",NSStringFromCGPoint(movePoint));
         
         self.moveContentView.center = CGPointMake(movePoint.x - startPoint.x+ originCenter.x, movePoint.y  - startPoint.y+originCenter.y);
+        
+//        self.moveSnapshotView.center = CGPointMake(movePoint.x - startPoint.x+ originCenter.x, movePoint.y  - startPoint.y+originCenter.y);
+//
     } else if (recognizer.state == UIGestureRecognizerStateEnded) {
         startPoint = CGPointZero;
         originCenter = CGPointZero;
-        self.moveContentView.frame = startRect;
+        
+        if (self.moveContentView.frame.origin.x > [UIScreen mainScreen].bounds.size.width*0.5) {
+            if ([self.delegate respondsToSelector:@selector(dismissControllerFromCell:)]) {
+                [self.delegate dismissControllerFromCell:self];
+            }
+        } else {
+            self.moveContentView.frame = startRect;
+        }
+//        [self.moveSnapshotView removeFromSuperview];
     }
 }
 

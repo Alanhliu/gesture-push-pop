@@ -8,10 +8,13 @@
 
 #import "ViewController2.h"
 #import "ViewController2Detail.h"
+#import "Message.h"
+#import "VC2CollectionViewCell.h"
 @interface ViewController2 ()<UIGestureRecognizerDelegate,UINavigationControllerDelegate,UIViewControllerAnimatedTransitioning,UICollectionViewDelegate,UICollectionViewDataSource>
 @property (nonatomic, strong, readwrite) UIPercentDrivenInteractiveTransition *interactiveTransition;
 @property (nonatomic, assign) CGPoint p;
 @property (nonatomic, assign) double progress;
+@property (nonatomic, strong) NSMutableArray *messageArray;
 @end
 
 @implementation ViewController2
@@ -22,6 +25,13 @@
     
     UIPanGestureRecognizer *gestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
     [self.view addGestureRecognizer:gestureRecognizer];
+    
+    self.messageArray = [NSMutableArray new];
+    for (int i = 1; i<= 20; i++) {
+        Message *message = [Message new];
+        message.msgId = i;
+        [self.messageArray addObject:message];
+    }
 }
 
 - (void)handlePan:(UIPanGestureRecognizer *)recognizer {
@@ -145,20 +155,35 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return 20;
+    return self.messageArray.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
-    
+    VC2CollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
+    Message *message = self.messageArray[indexPath.row];
+    cell.textLabel.text = [@(message.msgId) stringValue];
     return cell;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     ViewController2Detail *vc2d = [self.storyboard instantiateViewControllerWithIdentifier:@"ViewController2Detail"];
+    
+    UICollectionViewCell *cell = [collectionView cellForItemAtIndexPath:indexPath];
+    CGRect rect = [cell convertRect:cell.frame toView:self.view];
+    
+    vc2d.messageArray = self.messageArray;
+    vc2d.currentIndex = indexPath.row;
+    vc2d.moveShapShotView = cell;
+    vc2d.currentRect = rect;
+    
     [self presentViewController:vc2d animated:YES completion:nil];
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath;
+{
+    return CGSizeMake(([UIScreen mainScreen].bounds.size.width-10)/3, 160) ;
 }
 
 - (void)didReceiveMemoryWarning {

@@ -9,10 +9,14 @@
 #import "ViewController2Detail.h"
 #import "DetailCollectionViewCell.h"
 #import "DetailTableViewCell.h"
-@interface ViewController2Detail ()<UIGestureRecognizerDelegate,UIViewControllerTransitioningDelegate,UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout,UITableViewDelegate,UITableViewDataSource>
+#import "Message.h"
+#import "DetailTransitioning.h"
+@interface ViewController2Detail ()<UIGestureRecognizerDelegate,UIViewControllerTransitioningDelegate,UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout,UITableViewDelegate,UITableViewDataSource,DetailCollectionViewCellDelegate>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionview;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) DetailTransitioning *transitioning;
 
+@property (nonatomic, assign) CGRect fromRect;
 @end
 
 @implementation ViewController2Detail
@@ -58,6 +62,11 @@
     
     self.view.backgroundColor = [UIColor clearColor];
 
+    [self.collectionview scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:self.currentIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionTop animated:NO];
+    
+    self.transitioningDelegate = self;
+    
+    
 }
 
 #pragma mark - tableView
@@ -80,14 +89,45 @@
 #pragma mark - collectionView
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return 20;
+    return self.messageArray.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     DetailCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
-//    cell.textLabel.text = [@(indexPath.row) stringValue];
+    cell.delegate = self;
+    Message *message = self.messageArray[indexPath.row];
+    cell.textLabel.text = [@(message.msgId) stringValue];
     return cell;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didEndDisplayingCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSArray *visibleCells = [collectionView visibleCells];
+    NSIndexPath *needPath = [collectionView indexPathForCell:visibleCells.firstObject];
+    
+    CGFloat width = self.currentRect.size.width;
+    CGFloat height = self.currentRect.size.height;
+    
+    NSInteger column = needPath.row % 3;
+    NSInteger row = needPath.row / 3;
+    
+    CGFloat x = column*width + column*5;
+    CGFloat y = row*height + row*5;
+    if (y > [UIScreen mainScreen].bounds.size.height) {
+        y = 0;
+    }
+    
+    self.currentRect = CGRectMake(x, y, width, height);
+}
+
+- (void)dismissControllerFromCell:(UICollectionViewCell *)cell
+{
+    CGRect rect = [cell convertRect:cell.frame toView:self.view];
+    self.fromRect = rect;
+    self.transitioning.fromRect = self.fromRect;
+    self.moveShapShotView = cell;
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath;
@@ -95,20 +135,33 @@
     return [UIScreen mainScreen].bounds.size;
 }
 
-//-(id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source
-//{
-//    return nil;
-//}
-//
-//- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed
-//{
-//    return nil;
-//}
+-(id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source
+{
+    self.transitioning.show = YES;
+    self.transitioning.moveShapShotView = self.moveShapShotView;
+    self.currentRect = self.currentRect;
+    return self.transitioning;
+}
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed
+{
+    self.transitioning.show = NO;
+    self.transitioning.moveShapShotView = self.moveShapShotView;
+    self.currentRect = self.currentRect;
+    return self.transitioning;
+}
 
 - (IBAction)dismiss:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (DetailTransitioning *)transitioning
+{
+    if (!_transitioning) {
+        _transitioning = [[DetailTransitioning alloc] init];
+    }
+    return _transitioning;
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

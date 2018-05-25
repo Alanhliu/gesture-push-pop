@@ -7,7 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+@protocol DetailCollectionViewCellDelegate <NSObject>
+
+- (void)dismissControllerFromCell:(UICollectionViewCell *)cell;
+//- (void)
+
+@end
 
 @interface DetailCollectionViewCell : UICollectionViewCell
+
 @property (weak, nonatomic) IBOutlet UIView *moveContentView;
+@property (weak, nonatomic) IBOutlet UILabel *textLabel;
+
+@property (nonatomic, weak) id<DetailCollectionViewCellDelegate> delegate;
 @end
