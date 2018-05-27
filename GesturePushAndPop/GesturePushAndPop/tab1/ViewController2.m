@@ -171,11 +171,11 @@
     ViewController2Detail *vc2d = [self.storyboard instantiateViewControllerWithIdentifier:@"ViewController2Detail"];
     
     UICollectionViewCell *cell = [collectionView cellForItemAtIndexPath:indexPath];
-    CGRect rect = [cell convertRect:cell.frame toView:self.view];
+    CGRect rect = cell.frame;
     
     vc2d.messageArray = self.messageArray;
     vc2d.currentIndex = indexPath.row;
-    vc2d.moveShapShotView = cell;
+    vc2d.moveShapShotView = [cell snapshotViewAfterScreenUpdates:NO];
     vc2d.currentRect = rect;
     
     [self presentViewController:vc2d animated:YES completion:nil];

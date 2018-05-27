@@ -63,10 +63,6 @@
     self.view.backgroundColor = [UIColor clearColor];
 
     [self.collectionview scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:self.currentIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionTop animated:NO];
-    
-    self.transitioningDelegate = self;
-    
-    
 }
 
 #pragma mark - tableView
@@ -121,12 +117,12 @@
     self.currentRect = CGRectMake(x, y, width, height);
 }
 
-- (void)dismissControllerFromCell:(UICollectionViewCell *)cell
+- (void)dismissControllerFromCell:(DetailCollectionViewCell *)cell
 {
-    CGRect rect = [cell convertRect:cell.frame toView:self.view];
+    CGRect rect = [cell.moveContentView convertRect:cell.moveContentView.frame toView:self.view];
     self.fromRect = rect;
     self.transitioning.fromRect = self.fromRect;
-    self.moveShapShotView = cell;
+    self.moveShapShotView = cell.moveContentView;
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -139,7 +135,7 @@
 {
     self.transitioning.show = YES;
     self.transitioning.moveShapShotView = self.moveShapShotView;
-    self.currentRect = self.currentRect;
+    self.transitioning.currentRect = self.currentRect;
     return self.transitioning;
 }
 
@@ -147,7 +143,8 @@
 {
     self.transitioning.show = NO;
     self.transitioning.moveShapShotView = self.moveShapShotView;
-    self.currentRect = self.currentRect;
+    self.transitioning.currentRect = self.currentRect;
+    self.transitioning.fromRect = self.fromRect;
     return self.transitioning;
 }
 

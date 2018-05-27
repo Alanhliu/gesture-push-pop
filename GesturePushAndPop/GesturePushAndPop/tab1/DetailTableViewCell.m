@@ -17,6 +17,7 @@
 {
     self = [super initWithCoder:aDecoder];
     if (self) {
+        self.backgroundColor = [UIColor clearColor];
         UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
         panGestureRecognizer.delegate = self;
         [self addGestureRecognizer:panGestureRecognizer];

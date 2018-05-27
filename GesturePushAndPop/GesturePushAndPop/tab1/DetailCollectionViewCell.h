@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+@class DetailCollectionViewCell;
 @protocol DetailCollectionViewCellDelegate <NSObject>
 
-- (void)dismissControllerFromCell:(UICollectionViewCell *)cell;
+- (void)dismissControllerFromCell:(DetailCollectionViewCell *)cell;
 //- (void)
 
 @end
