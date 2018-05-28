@@ -8,10 +8,20 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol ViewController2DetailDelegate <NSObject>
+
+- (void)collectionViewDidScrollToIndexPath:(NSIndexPath *)indexPath;
+
+@end
+
 @interface ViewController2Detail : UIViewController
 @property (nonatomic, strong) NSMutableArray *messageArray;
 
-@property (nonatomic, assign) NSUInteger currentIndex;
-@property (nonatomic, assign) CGRect currentRect;
+@property (nonatomic, assign) NSUInteger presentIndex;
+@property (nonatomic, assign) CGRect presentRect;
+@property (nonatomic, assign) CGRect presentRectForCal_y;
 @property (nonatomic, strong) UIView *moveShapShotView;
+
+@property (nonatomic, weak) id<ViewController2DetailDelegate> delegate;
+
 @end

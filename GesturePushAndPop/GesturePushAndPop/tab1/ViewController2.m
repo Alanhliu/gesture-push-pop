@@ -10,11 +10,13 @@
 #import "ViewController2Detail.h"
 #import "Message.h"
 #import "VC2CollectionViewCell.h"
-@interface ViewController2 ()<UIGestureRecognizerDelegate,UINavigationControllerDelegate,UIViewControllerAnimatedTransitioning,UICollectionViewDelegate,UICollectionViewDataSource>
+@interface ViewController2 ()<UIGestureRecognizerDelegate,UINavigationControllerDelegate,UIViewControllerAnimatedTransitioning,UICollectionViewDelegate,UICollectionViewDataSource,ViewController2DetailDelegate>
 @property (nonatomic, strong, readwrite) UIPercentDrivenInteractiveTransition *interactiveTransition;
 @property (nonatomic, assign) CGPoint p;
 @property (nonatomic, assign) double progress;
 @property (nonatomic, strong) NSMutableArray *messageArray;
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+
 @end
 
 @implementation ViewController2
@@ -27,7 +29,7 @@
     [self.view addGestureRecognizer:gestureRecognizer];
     
     self.messageArray = [NSMutableArray new];
-    for (int i = 1; i<= 20; i++) {
+    for (int i = 0; i<20; i++) {
         Message *message = [Message new];
         message.msgId = i;
         [self.messageArray addObject:message];
@@ -161,6 +163,7 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     VC2CollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
+    cell.tag = indexPath.row;
     Message *message = self.messageArray[indexPath.row];
     cell.textLabel.text = [@(message.msgId) stringValue];
     return cell;
@@ -169,16 +172,34 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     ViewController2Detail *vc2d = [self.storyboard instantiateViewControllerWithIdentifier:@"ViewController2Detail"];
+    vc2d.delegate = self;
+    
+    NSArray *visibleCells = [collectionView visibleCells];
+    
+//    visibleCells = [visibleCells sortedArrayUsingComparator:^NSComparisonResult(UICollectionViewCell *obj1, UICollectionViewCell *obj2) {
+//        return obj1.tag > obj2.tag;
+//    }];
+//    
+//    UICollectionViewCell *visibleFirstCell = visibleCells.firstObject;
+//    UICollectionViewCell *visibleLastCell = visibleCells.lastObject;
     
     UICollectionViewCell *cell = [collectionView cellForItemAtIndexPath:indexPath];
-    CGRect rect = cell.frame;
     
+    CGRect rect = [cell convertRect:cell.contentView.frame toView:self.view];
+    
+    NSLog(@"presentRect:%@",NSStringFromCGRect(rect));
     vc2d.messageArray = self.messageArray;
-    vc2d.currentIndex = indexPath.row;
+    vc2d.presentIndex = indexPath.row;
     vc2d.moveShapShotView = [cell snapshotViewAfterScreenUpdates:NO];
-    vc2d.currentRect = rect;
+    vc2d.presentRect = rect;
+    vc2d.presentRectForCal_y = cell.frame;
     
     [self presentViewController:vc2d animated:YES completion:nil];
+}
+
+- (void)collectionViewDidScrollToIndexPath:(NSIndexPath *)indexPath
+{
+    [self.collectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionTop animated:NO];
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath;

@@ -24,7 +24,7 @@
         UIViewController *toViewController = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
         NSTimeInterval duration = [self transitionDuration:transitionContext];
 
-        self.moveShapShotView.frame = self.currentRect;
+        self.moveShapShotView.frame = self.presentRect;
 
         [containerView addSubview:toViewController.view];
         [containerView addSubview:self.moveShapShotView];
@@ -83,9 +83,9 @@
         NSTimeInterval duration = [self transitionDuration:transitionContext];
 
 
-        self.moveShapShotView.frame = CGRectMake(0, 0, 360, 160);
+        self.moveShapShotView.frame = self.dismissRect;
         [UIView animateWithDuration:duration animations:^{
-            self.moveShapShotView.frame = CGRectMake(0, 0, 120, 160);
+            self.moveShapShotView.frame = self.presentRect;
         } completion:^(BOOL finished) {
             [self.moveShapShotView removeFromSuperview];
             self.moveShapShotView = nil;

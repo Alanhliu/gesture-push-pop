@@ -16,7 +16,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) DetailTransitioning *transitioning;
 
-@property (nonatomic, assign) CGRect fromRect;
+@property (nonatomic, assign) CGRect dismissRect;
 @end
 
 @implementation ViewController2Detail
@@ -62,7 +62,7 @@
     
     self.view.backgroundColor = [UIColor clearColor];
 
-    [self.collectionview scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:self.currentIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionTop animated:NO];
+    [self.collectionview scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:self.presentIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionTop animated:NO];
 }
 
 #pragma mark - tableView
@@ -97,31 +97,38 @@
     return cell;
 }
 
+static CGFloat init_y = 64;
 - (void)collectionView:(UICollectionView *)collectionView didEndDisplayingCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
 {
     NSArray *visibleCells = [collectionView visibleCells];
     NSIndexPath *needPath = [collectionView indexPathForCell:visibleCells.firstObject];
     
-    CGFloat width = self.currentRect.size.width;
-    CGFloat height = self.currentRect.size.height;
+    CGFloat width = self.presentRect.size.width;
+    CGFloat height = self.presentRect.size.height;
     
     NSInteger column = needPath.row % 3;
     NSInteger row = needPath.row / 3;
-    
+
     CGFloat x = column*width + column*5;
-    CGFloat y = row*height + row*5;
-    if (y > [UIScreen mainScreen].bounds.size.height) {
-        y = 0;
+//    CGFloat y = row*height + row*5 + init_y;
+    CGFloat y = self.presentRect.origin.y;
+    
+    CGFloat presentViewHeight = [UIScreen mainScreen].bounds.size.height-init_y;
+    
+    if (y > presentViewHeight) {
+        if ([self.delegate respondsToSelector:@selector(collectionViewDidScrollToIndexPath:)]) {
+            [self.delegate collectionViewDidScrollToIndexPath:needPath];
+        }
     }
     
-    self.currentRect = CGRectMake(x, y, width, height);
+    self.presentRect = CGRectMake(x, y, width, height);
 }
 
 - (void)dismissControllerFromCell:(DetailCollectionViewCell *)cell
 {
-    CGRect rect = [cell.moveContentView convertRect:cell.moveContentView.frame toView:self.view];
-    self.fromRect = rect;
-    self.transitioning.fromRect = self.fromRect;
+    CGRect rect = [cell convertRect:cell.moveContentView.frame toView:self.view];
+    self.dismissRect = rect;
+    self.transitioning.dismissRect = self.dismissRect;
     self.moveShapShotView = cell.moveContentView;
     [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -135,7 +142,7 @@
 {
     self.transitioning.show = YES;
     self.transitioning.moveShapShotView = self.moveShapShotView;
-    self.transitioning.currentRect = self.currentRect;
+    self.transitioning.presentRect = self.presentRect;
     return self.transitioning;
 }
 
@@ -143,8 +150,8 @@
 {
     self.transitioning.show = NO;
     self.transitioning.moveShapShotView = self.moveShapShotView;
-    self.transitioning.currentRect = self.currentRect;
-    self.transitioning.fromRect = self.fromRect;
+    self.transitioning.presentRect = self.presentRect;
+    self.transitioning.dismissRect = self.dismissRect;
     return self.transitioning;
 }
 

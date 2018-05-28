@@ -12,6 +12,6 @@
 
 @property (nonatomic, strong) UIView *moveShapShotView;
 @property (nonatomic, assign) BOOL show;
-@property (nonatomic, assign) CGRect currentRect;
-@property (nonatomic, assign) CGRect fromRect;
+@property (nonatomic, assign) CGRect presentRect;
+@property (nonatomic, assign) CGRect dismissRect;
 @end
