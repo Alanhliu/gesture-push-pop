@@ -11,15 +11,10 @@
 @interface CommentTableView()<UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic, assign) BOOL isDragging;
-
+@property (nonatomic, assign) CGPoint lastContentOffset;
 @end
 
 @implementation CommentTableView
-{
-    CGPoint originPoint;
-    CGRect originRect;
-    CGPoint beginTouchPoint;
-}
 
 /*
 // Only override drawRect: if you perform custom drawing.
@@ -38,6 +33,9 @@
     return self;
 }
 
+static CGPoint originPoint;
+static CGRect originRect;
+static CGPoint beginTouchPoint;
 - (void)commonInit
 {
     _isDragging = NO;
@@ -50,40 +48,51 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    if (scrollView.contentOffset.y < 0) {
+    if (scrollView.contentOffset.y <= 0 ||
+        scrollView.contentOffset.y - self.lastContentOffset.y > 0) {
         [self panGestureRecognizers:scrollView.panGestureRecognizer];
+    }
+    self.lastContentOffset = scrollView.contentOffset;
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+    _isDragging = NO;
+    if (self.frame.origin.y - originPoint.y < 100) {
+        [UIView animateWithDuration:0.2 animations:^{
+            self.frame = originRect;
+        }];
+    } else {
+        [UIView animateWithDuration:0.2 animations:^{
+            self.frame = CGRectMake(0, [UIScreen mainScreen].bounds.size.height, originRect.size.width, originRect.size.height);
+        } completion:^(BOOL finished) {
+            [self removeFromSuperview];
+        }];
     }
 }
 
 - (void)panGestureRecognizers:(UIPanGestureRecognizer *)gestureRecognizer
 {
     if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
-        
+        NSLog(@"not called");
     } else if (gestureRecognizer.state == UIGestureRecognizerStateChanged) {
         if (_isDragging == NO) {
             beginTouchPoint = [gestureRecognizer locationInView:self];
-        } else {
+        }
+        
+        if (_isDragging == NO) {
             _isDragging = YES;
         }
         
         CGPoint moveTouchPoint = [gestureRecognizer locationInView:self];
+        NSLog(@"%@",NSStringFromCGPoint(moveTouchPoint));
+        
         self.frame = CGRectMake(0, originPoint.y+(moveTouchPoint.y - beginTouchPoint.y) , originRect.size.width, originRect.size.height);
         
     } else if (gestureRecognizer.state == UIGestureRecognizerStateFailed) {
-        
+        NSLog(@"not called");
     } else if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
-        _isDragging = NO;
-        if (self.frame.origin.y - originPoint.y < 100) {
-            [UIView animateWithDuration:0.2 animations:^{
-                self.frame = originRect;
-            }];
-        } else {
-            [UIView animateWithDuration:0.2 animations:^{
-                self.frame = CGRectMake(0, [UIScreen mainScreen].bounds.size.height, originRect.size.width, originRect.size.height);
-            } completion:^(BOOL finished) {
-                [self removeFromSuperview];
-            }];
-        }
+        NSLog(@"not called");
     }
 }
 
