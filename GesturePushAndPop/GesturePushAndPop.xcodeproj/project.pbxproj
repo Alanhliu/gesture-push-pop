@@ -32,6 +32,10 @@
 		417C212520B3A51000E11B48 /* UIViewController+Snapshot.m in Sources */ = {isa = PBXBuildFile; fileRef = 417C212420B3A51000E11B48 /* UIViewController+Snapshot.m */; };
 		417C212820B3C1A000E11B48 /* ViewController5.m in Sources */ = {isa = PBXBuildFile; fileRef = 417C212720B3C1A000E11B48 /* ViewController5.m */; };
 		417C213520B404FB00E11B48 /* DragPopAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 417C213420B404FB00E11B48 /* DragPopAnimation.m */; };
+		418C4A1A20C5243A0058B57F /* CommentTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 418C4A1920C5243A0058B57F /* CommentTableView.m */; };
+		418F1AA520BF7EF400625504 /* CommentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 418F1AA420BF7EF400625504 /* CommentView.m */; };
+		418F1AA720BF7F0500625504 /* CommentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 418F1AA620BF7F0500625504 /* CommentView.xib */; };
+		41C1647120BFCE3000F1004C /* HitTestTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 41C1647020BFCE3000F1004C /* HitTestTableView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,6 +106,13 @@
 		417C212720B3C1A000E11B48 /* ViewController5.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController5.m; sourceTree = "<group>"; };
 		417C213320B404FB00E11B48 /* DragPopAnimation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DragPopAnimation.h; sourceTree = "<group>"; };
 		417C213420B404FB00E11B48 /* DragPopAnimation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DragPopAnimation.m; sourceTree = "<group>"; };
+		418C4A1820C5243A0058B57F /* CommentTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommentTableView.h; sourceTree = "<group>"; };
+		418C4A1920C5243A0058B57F /* CommentTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommentTableView.m; sourceTree = "<group>"; };
+		418F1AA320BF7EF400625504 /* CommentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommentView.h; sourceTree = "<group>"; };
+		418F1AA420BF7EF400625504 /* CommentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommentView.m; sourceTree = "<group>"; };
+		418F1AA620BF7F0500625504 /* CommentView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommentView.xib; sourceTree = "<group>"; };
+		41C1646F20BFCE3000F1004C /* HitTestTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HitTestTableView.h; sourceTree = "<group>"; };
+		41C1647020BFCE3000F1004C /* HitTestTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HitTestTableView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,9 +165,9 @@
 			children = (
 				41573E9420AE7481002B6A24 /* AppDelegate.h */,
 				41573E9520AE7481002B6A24 /* AppDelegate.m */,
-				417C213020B4027D00E11B48 /* tab1 */,
-				417C213120B4028C00E11B48 /* tab2 */,
-				417C213220B402DE00E11B48 /* tab3 */,
+				417C213020B4027D00E11B48 /* tab1_探索 */,
+				417C213120B4028C00E11B48 /* tab2_封装 */,
+				417C213220B402DE00E11B48 /* tab3_应用 */,
 				41573E9A20AE7481002B6A24 /* Main.storyboard */,
 				41573E9D20AE7485002B6A24 /* Assets.xcassets */,
 				41573E9F20AE7485002B6A24 /* LaunchScreen.storyboard */,
@@ -213,11 +224,18 @@
 			path = Animations;
 			sourceTree = "<group>";
 		};
-		417C213020B4027D00E11B48 /* tab1 */ = {
+		417C213020B4027D00E11B48 /* tab1_探索 */ = {
 			isa = PBXGroup;
 			children = (
 				41573E9720AE7481002B6A24 /* ViewController.h */,
 				41573E9820AE7481002B6A24 /* ViewController.m */,
+				418F1AA320BF7EF400625504 /* CommentView.h */,
+				418F1AA420BF7EF400625504 /* CommentView.m */,
+				418F1AA620BF7F0500625504 /* CommentView.xib */,
+				41C1646F20BFCE3000F1004C /* HitTestTableView.h */,
+				41C1647020BFCE3000F1004C /* HitTestTableView.m */,
+				418C4A1820C5243A0058B57F /* CommentTableView.h */,
+				418C4A1920C5243A0058B57F /* CommentTableView.m */,
 				41573EC620AE7FEB002B6A24 /* ViewController2.h */,
 				41573EC720AE7FEB002B6A24 /* ViewController2.m */,
 				4141E0F020B7E01F00180C51 /* VC2CollectionViewCell.h */,
@@ -233,10 +251,10 @@
 				415C957220B6538100811735 /* DetailTransitioning.h */,
 				415C957320B6538100811735 /* DetailTransitioning.m */,
 			);
-			path = tab1;
+			path = "tab1_探索";
 			sourceTree = "<group>";
 		};
-		417C213120B4028C00E11B48 /* tab2 */ = {
+		417C213120B4028C00E11B48 /* tab2_封装 */ = {
 			isa = PBXGroup;
 			children = (
 				416918A420B2AFC4004C2BBE /* AnimatedTransitioning */,
@@ -247,14 +265,14 @@
 				417C212620B3C1A000E11B48 /* ViewController5.h */,
 				417C212720B3C1A000E11B48 /* ViewController5.m */,
 			);
-			path = tab2;
+			path = "tab2_封装";
 			sourceTree = "<group>";
 		};
-		417C213220B402DE00E11B48 /* tab3 */ = {
+		417C213220B402DE00E11B48 /* tab3_应用 */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			path = tab3;
+			path = "tab3_应用";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -362,6 +380,7 @@
 			files = (
 				41573EA120AE7485002B6A24 /* LaunchScreen.storyboard in Resources */,
 				41573E9E20AE7485002B6A24 /* Assets.xcassets in Resources */,
+				418F1AA720BF7F0500625504 /* CommentView.xib in Resources */,
 				41573E9C20AE7481002B6A24 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -388,11 +407,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				416918A720B2B026004C2BBE /* BaseAnimatedTransitioningViewController.m in Sources */,
+				418F1AA520BF7EF400625504 /* CommentView.m in Sources */,
 				41573E9920AE7481002B6A24 /* ViewController.m in Sources */,
+				418C4A1A20C5243A0058B57F /* CommentTableView.m in Sources */,
 				417C212520B3A51000E11B48 /* UIViewController+Snapshot.m in Sources */,
 				416918BA20B2BCB2004C2BBE /* ViewController3.m in Sources */,
 				4141E0F220B7E01F00180C51 /* VC2CollectionViewCell.m in Sources */,
 				416918B020B2B25C004C2BBE /* UIView+Snapshot.m in Sources */,
+				41C1647120BFCE3000F1004C /* HitTestTableView.m in Sources */,
 				416918B420B2B803004C2BBE /* CommonPushPopAnimation.m in Sources */,
 				41573EC820AE7FEB002B6A24 /* ViewController2.m in Sources */,
 				414E544220B53F8600EB9E99 /* ViewController2Detail.m in Sources */,

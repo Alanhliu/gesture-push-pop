@@ -10,6 +10,8 @@
 #import "ViewController2.h"
 #import "UIView+Snapshot.h"
 #import "UIViewController+Snapshot.h"
+#import "CommentView.h"
+#import "CommentTableView.h"
 @interface ViewController ()<UIGestureRecognizerDelegate,UINavigationControllerDelegate,UIViewControllerAnimatedTransitioning>
 @property (nonatomic, strong, readwrite) UIPercentDrivenInteractiveTransition *interactiveTransition;
 @property (nonatomic, assign) CGPoint p;
@@ -28,7 +30,15 @@
     
     UIPanGestureRecognizer *gestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
     [self.view addGestureRecognizer:gestureRecognizer];
-    
+}
+- (IBAction)show:(id)sender {
+    CommentView *commentView = [[CommentView alloc] init];
+    [commentView show];
+}
+
+- (IBAction)show2:(id)sender {
+    CommentTableView *commentTableView = [[CommentTableView alloc] init];
+    [commentTableView show];
 }
 
 - (void)handlePan:(UIPanGestureRecognizer *)recognizer {

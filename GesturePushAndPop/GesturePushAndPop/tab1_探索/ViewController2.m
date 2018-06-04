@@ -197,6 +197,11 @@
     [self presentViewController:vc2d animated:YES completion:nil];
 }
 
+- (void)collectionViewDidScrollToPoint:(CGPoint)p
+{
+    [self.collectionView setContentOffset:p];
+}
+
 - (void)collectionViewDidScrollToIndexPath:(NSIndexPath *)indexPath
 {
     [self.collectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionTop animated:NO];

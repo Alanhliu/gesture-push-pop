@@ -51,7 +51,14 @@ static CGRect startRect;
         
 //        NSLog(@"%@",NSStringFromCGPoint(movePoint));
         
+        
+        
+        
         self.moveContentView.center = CGPointMake(movePoint.x - startPoint.x+ originCenter.x, movePoint.y  - startPoint.y+originCenter.y);
+        
+        CGFloat scale = 1 - fabs(originCenter.x - self.moveContentView.center.x) / startRect.size.width*0.5;
+        self.moveContentView.bounds = CGRectMake(0, 0, scale*startRect.size.width, scale*startRect.size.height);
+        
         
 //        self.moveSnapshotView.center = CGPointMake(movePoint.x - startPoint.x+ originCenter.x, movePoint.y  - startPoint.y+originCenter.y);
 //
@@ -64,7 +71,13 @@ static CGRect startRect;
                 [self.delegate dismissControllerFromCell:self];
             }
         } else {
-            self.moveContentView.frame = startRect;
+            [UIView animateWithDuration:.3 delay:0 usingSpringWithDamping:.7 initialSpringVelocity:8 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                self.moveContentView.frame = startRect;
+                [self.moveContentView layoutIfNeeded];
+            } completion:^(BOOL finished) {
+                
+            }];
+            
         }
 //        [self.moveSnapshotView removeFromSuperview];
     }

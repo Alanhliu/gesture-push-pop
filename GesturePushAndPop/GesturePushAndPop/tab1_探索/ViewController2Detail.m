@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionview;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) DetailTransitioning *transitioning;
+@property (nonatomic, assign) NSInteger lastRow;
 
 @property (nonatomic, assign) CGRect dismissRect;
 @end
@@ -63,6 +64,8 @@
     self.view.backgroundColor = [UIColor clearColor];
 
     [self.collectionview scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:self.presentIndex inSection:0] atScrollPosition:UICollectionViewScrollPositionTop animated:NO];
+    
+    self.lastRow = self.presentIndex / 3;
 }
 
 #pragma mark - tableView
@@ -110,17 +113,37 @@ static CGFloat init_y = 64;
     NSInteger row = needPath.row / 3;
 
     CGFloat x = column*width + column*5;
-//    CGFloat y = row*height + row*5 + init_y;
     CGFloat y = self.presentRect.origin.y;
     
     CGFloat presentViewHeight = [UIScreen mainScreen].bounds.size.height-init_y;
     
-    if (y > presentViewHeight) {
-        if ([self.delegate respondsToSelector:@selector(collectionViewDidScrollToIndexPath:)]) {
-            [self.delegate collectionViewDidScrollToIndexPath:needPath];
+    
+    NSInteger minus = self.presentIndex - needPath.row;
+    if (minus > 0) {//看旧的，视图上滚，手指下滑，y值变大
+        if (self.lastRow != row)
+            y = y + (row*height + row*5);
+        
+        if (y > presentViewHeight) {
+            if ([self.delegate respondsToSelector:@selector(collectionViewDidScrollToPoint:)]) {
+                [self.delegate collectionViewDidScrollToPoint:CGPointMake(0, -y)];
+            }
+            y = init_y;
         }
+    } else if (minus < 0){//看新的，视图下滚，手指上滑，y值变小
+        if (self.lastRow != row)
+            y = y - (row*height + row*5);
+        
+        if (y < 0) {
+            if ([self.delegate respondsToSelector:@selector(collectionViewDidScrollToPoint:)]) {
+                [self.delegate collectionViewDidScrollToPoint:CGPointMake(0, -(y-init_y))];
+            }
+            y = init_y;
+        }
+    } else {//y不变，没有进行上下滑动
+        
     }
     
+    self.lastRow = row;
     self.presentRect = CGRectMake(x, y, width, height);
 }
 

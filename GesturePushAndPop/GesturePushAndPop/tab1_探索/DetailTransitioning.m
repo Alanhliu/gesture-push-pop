@@ -92,6 +92,14 @@
             [transitionContext completeTransition:![transitionContext transitionWasCancelled]];
         }];
         
+//        [UIView animateWithDuration:duration delay:0 usingSpringWithDamping:.8 initialSpringVelocity:8 options:UIViewAnimationOptionCurveEaseIn animations:^{
+//            self.moveShapShotView.frame = self.presentRect;
+//        } completion:^(BOOL finished) {
+//            [self.moveShapShotView removeFromSuperview];
+//            self.moveShapShotView = nil;
+//            [transitionContext completeTransition:![transitionContext transitionWasCancelled]];
+//        }];
+        
         
         // 取出present时的截图用于动画
 //        UIViewController *fromVC = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];

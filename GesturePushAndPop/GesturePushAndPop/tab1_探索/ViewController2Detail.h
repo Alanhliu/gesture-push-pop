@@ -11,6 +11,7 @@
 @protocol ViewController2DetailDelegate <NSObject>
 
 - (void)collectionViewDidScrollToIndexPath:(NSIndexPath *)indexPath;
+- (void)collectionViewDidScrollToPoint:(CGPoint)p;
 
 @end
 
