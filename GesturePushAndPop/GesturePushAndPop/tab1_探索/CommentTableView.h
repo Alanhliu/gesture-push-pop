@@ -11,5 +11,6 @@
 @interface CommentTableView : UITableView
 
 - (void)show;
+- (void)hide;
 
 @end
