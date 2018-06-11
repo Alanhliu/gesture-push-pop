@@ -19,9 +19,39 @@
 @property (weak, nonatomic) IBOutlet UIButton *button;
 @property (nonatomic, assign) UINavigationControllerOperation operation;
 @property (nonatomic, strong) UIImageView *screenShotView;
+
+@property (nonatomic, strong) CommentTableView *commentTableView;
+
+@property (nonatomic, assign) BOOL isShow;
 @end
 
 @implementation ViewController
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    //每次进入时查看之前记录的状态
+    if (self.isShow) {
+        //如果为打开状态，则恢复打开状态
+        [self.commentTableView show:SHOW_HIDE_DURATION_DEFAULT];
+    }
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    //每次离开时记录commentTableView是否为打开状态
+    self.isShow = self.commentTableView.isShow;
+    if (self.commentTableView.isShow) {
+        //如果为打开状态，则关闭
+        [self.commentTableView hide:SHOW_HIDE_DURATION_IMEDIATELY];
+    }
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -30,15 +60,28 @@
     
     UIPanGestureRecognizer *gestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
     [self.view addGestureRecognizer:gestureRecognizer];
+    
+    self.commentTableView = [[CommentTableView alloc] init];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushNext) name:@"pushNext" object:nil];
 }
+
+- (void)pushNext
+{
+    [self push:nil];
+}
+
 - (IBAction)show:(id)sender {
+    //这种方式通过，在临界点时切换手势作用在子view还是父view上，实现简单，
+    //但在拖拽时，在临界点处始终无法，连贯流畅的拖拽，因为手势作用在不同view之间切换
+    //所以，show2是目前比较好的实现方案
     CommentView *commentView = [[CommentView alloc] init];
     [commentView show];
 }
 
 - (IBAction)show2:(id)sender {
-    CommentTableView *commentTableView = [[CommentTableView alloc] init];
-    [commentTableView show];
+    
+    [self.commentTableView show:SHOW_HIDE_DURATION_DEFAULT];
 }
 
 - (void)handlePan:(UIPanGestureRecognizer *)recognizer {
